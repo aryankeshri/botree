@@ -16,7 +16,20 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
+from projects.views import list_project, list_document, add_project, add_document, home
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', home, name='home'),
+    url(r'^project/$', list_project, name='list_project'),
+    url(r'^document/$', list_document, name='list_document'),
+    url(r'^add/project/$', add_project, name='add_project'),
+    url(r'^add/document/$', add_document, name='add_document'),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

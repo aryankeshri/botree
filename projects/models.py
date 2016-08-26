@@ -4,7 +4,7 @@ from django.utils.text import slugify
 
 # Create your models here.
 class Project(models.Model):
-    name_of_project = models.CharField(verbose_name='Name', max_length=50, blank=False)
+    name_of_project = models.CharField(verbose_name='Name', max_length=50, blank=False, unique=True)
     slug = models.SlugField(unique=True, max_length=50)
 
     def __str__(self):

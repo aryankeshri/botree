@@ -5,6 +5,9 @@ from .forms import AddProjectForm, AddDocumentForm
 from .models import Project, Document
 
 # Create your views here.
+def home(request):
+    return render(request, 'base.html')
+
 def list_project(request):
     projects_list = Project.objects.all()
     paginator = Paginator(projects_list, 10)
@@ -28,25 +31,28 @@ def project_detail(request, project):
     return render(request, "project_detail.html", {"project": project})
 
 def add_project(request):
-    form = AddProjectForm(request.POST or None)
-    if form.is_valid():
-        instance = form.save(commit=False)
-        instance.save()
-        return HttpResponse('<h1>Add new project</h1>')
-    context = {
-        form: AddProjectForm
-    }
-    return render(request, 'add_project.html',context)
+    if request.method == 'POST':
+        form = AddProjectForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.save()
+            return HttpResponse('<h1>Add new project</h1>')
+    else:
+        form = AddProjectForm()
+    return render(request, 'add_project.html', {'form':form})
 
 def add_document(request):
-    form = AddDocumentForm(request.POST or None)
-    if form.is_valid():
-        instance = form.save(commit=False)
-        instance.save()
-        return HttpResponse('<h1>Add new Document</h1>')
-    context = {
-        form: AddDocumentForm
-    }
-    return render(request, 'add_document.html',context)
+    if request.method == 'POST':
+        form = AddDocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.save()
+            return HttpResponse('<h1>Add new Document</h1>')
+    else:
+        form = AddDocumentForm()
+    # context = {
+    #     form: AddDocumentForm
+    # }
+    return render(request, 'add_document.html', {'form': form})
 
 

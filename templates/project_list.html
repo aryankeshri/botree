@@ -1,46 +1,212 @@
+
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="en-us" >
 <head>
-    <meta charset="UTF-8">
-    <title>List of Projects</title>
+<title>Select project to change | Django site admin</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css" />
+
+  
+  <link rel="stylesheet" type="text/css" href="/static/admin/css/changelists.css" />
+  
+  
+    <script type="text/javascript" src="/admin/jsi18n/"></script>
+  
+  
+  
+
+
+
+
+<script type="text/javascript" src="/static/admin/js/core.js"></script>
+<script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+<script type="text/javascript" src="/static/admin/js/actions.js"></script>
+<script type="text/javascript" src="/static/admin/js/urlify.js"></script>
+<script type="text/javascript" src="/static/admin/js/prepopulate.js"></script>
+<script type="text/javascript" src="/static/admin/js/vendor/xregexp/xregexp.min.js"></script>
+
+<script type="text/javascript">
+(function($) {
+    $(document).ready(function($) {
+        $("tr input.action-select").actions();
+    });
+})(django.jQuery);
+</script>
+
+
+<meta name="robots" content="NONE,NOARCHIVE" />
 </head>
-<body>
-<div>
-<form method='GET' action='' class='row'>
-        <div class='col-sm-6'>
-            <div class='input-group'>
-                <input class='form-control' type='text' name='q' placeholder='Search posts' value='{{ request.GET.q }}'/>
-                <span class='input-group-btn'>
-                    <!-- <input class='btn btn-default' type='submit' value='Search' /> -->
-                    <button class='btn btn-default' type='submit'>Search <i class="fa fa-search"></i></button>
-                </span>
-            </div>
-        </div>
-</form>
-    <h1>Projects</h1>
-    <ul>
 
-    {% for obj in projects %}
-        <li><h2>
-            <a href="{{ obj.get_absolute_url }}">{{ obj.name_of_project }}</a>
-        </h2></li>
-    {% endfor %}
-    </ul>
-<div class="pagination">
-    <span class="step-links">
-        {% if object_list.has_previous %}
-            <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
-        {% endif %}
 
-        <span class="current">
-            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
-        </span>
+<body class=" app-projects model-project change-list"
+  data-admin-utc-offset="19800">
 
-        {% if object_list.has_next %}
-            <a href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
-        {% endif %}
-    </span>
+<!-- Container -->
+<div id="container">
+
+<div class="breadcrumbs">
+<a href="/admin/">Home</a>
+&rsaquo; <a href="/admin/projects/">Projects</a>
+&rsaquo; Projects
 </div>
+
+   <!-- Content -->
+    <div id="content" class="flex">
+        
+        <h1>Select project to change</h1>
+        
+  <div id="content-main">
+    
+      
+        <ul class="object-tools">
+          
+            <li>
+              
+              <a href="/add/project/" class="addlink">
+                Add project
+              </a>
+            </li>
+          
+        </ul>
+      
+    
+    
+    <div class="module filtered" id="changelist">
+      
+
+<div id="toolbar"><form id="changelist-search" method="get">
+<div><!-- DIV needed for valid HTML -->
+<label for="searchbar"><img src="/static/admin/img/search.svg" alt="Search" /></label>
+<input type="text" size="40" name="q" value="" id="searchbar" />
+<input type="submit" value="Search" />
+
+
+</div>
+</form></div>
+<script type="text/javascript">document.getElementById("searchbar").focus();</script>
+
+
+      
+
+
+      
+        
+          <div id="changelist-filter">
+            <h2>Filter</h2>
+            
+<h3> By Name </h3>
+<ul>
+
+    <li class="selected">
+        {% for obj in projects %}
+            <li><a href="{{ obj.get_absolute_url }}">{{ obj.name_of_project }}</a></li>
+    {% endfor %}
+</li>
+</ul>
+
+          </div>
+        
+      
+
+      <form id="changelist-form" method="post" novalidate><input type='hidden' name='csrfmiddlewaretoken' value='J03JlmyNO4dRI8vbjH6RFTSOYRqZALWT' />
+      
+
+      
+          
+<div class="actions">
+    <label>Action: <select name="action">
+<option value="" selected="selected">---------</option>
+<option value="delete_selected">Delete selected projects</option>
+</select></label><input class="select-across" name="select_across" type="hidden" value="0" />
+    <button type="submit" class="button" title="Run the selected action" name="index" value="0">Go</button>
+    
+        <script type="text/javascript">var _actions_icnt="4";</script>
+        <span class="action-counter">0 of 4 selected</span>
+        
+    
+</div>
+
+          
+
+
+<div class="results">
+<table id="result_list">
+<thead>
+<tr>
+
+<th scope="col"  class="action-checkbox-column">
+   
+   <div class="text"><span><input type="checkbox" id="action-toggle" /></span></div>
+   <div class="clear"></div>
+</th>
+<th scope="col"  class="sortable column-name_of_project">
+   
+     
+   
+   <div class="text"><a href="?o=1">Name</a></div>
+   <div class="clear"></div>
+</th>
+<th scope="col"  class="sortable column-slug">
+   
+     
+   
+   <div class="text"><a href="?o=2">Slug</a></div>
+   <div class="clear"></div>
+</th>
+</tr>
+</thead>
+<tbody>
+{% for obj in projects %}
+    <tr class="row1">
+        <td class="action-checkbox">
+            <input class="action-select" name="_selected_action" type="checkbox" value="6" />
+        </td>
+        <th class="field-name_of_project"><a href="{{ obj.get_absolute_url }}">{{ obj.name_of_project }}</a></th>
+        <td class="field-slug">{{ obj.slug }}</td>
+    </tr>
+{% endfor %}
+
+<!--<tr class="row1"><td class="action-checkbox"><input class="action-select" name="_selected_action" type="checkbox" value="6" /></td><th class="field-name_of_project"><a href="/admin/projects/project/6/change/">xy-ab</a></th><td class="field-slug">xy-ab</td></tr>-->
+
+
+<!--<tr class="row2"><td class="action-checkbox"><input class="action-select" name="_selected_action" type="checkbox" value="5" /></td><th class="field-name_of_project"><a href="/admin/projects/project/5/change/">new project1</a></th><td class="field-slug">new-project1</td></tr>-->
+
+
+<!--<tr class="row1"><td class="action-checkbox"><input class="action-select" name="_selected_action" type="checkbox" value="2" /></td><th class="field-name_of_project"><a href="/admin/projects/project/2/change/">new project</a></th><td class="field-slug">new-project</td></tr>-->
+
+
+<!--<tr class="row2"><td class="action-checkbox"><input class="action-select" name="_selected_action" type="checkbox" value="1" /></td><th class="field-name_of_project"><a href="/admin/projects/project/1/change/">xyz</a></th><td class="field-slug">xyz</td></tr>-->
+
+</tbody>
+</table>
+</div>
+
+
+          
+      
+      
+
+<p class="paginator">
+
+4 projects
+
+
+</p>
+
+      </form>
     </div>
+  </div>
+
+        
+        <br class="clear" />
+    </div>
+    <!-- END Content -->
+
+    <div id="footer"></div>
+</div>
+<!-- END Container -->
+
 </body>
 </html>

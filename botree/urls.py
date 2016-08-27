@@ -18,7 +18,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from projects.views import list_project, list_document, add_project, add_document, home
+from projects.views import list_project, list_document, add_project, add_document, home, project_detail
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^document/$', list_document, name='list_document'),
     url(r'^add/project/$', add_project, name='add_project'),
     url(r'^add/document/$', add_document, name='add_document'),
+    url(r'^project/(?P<slug>[\w-]+)/$', project_detail, name='project_detail'),
 ]
 
 

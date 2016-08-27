@@ -11,7 +11,8 @@ class Project(models.Model):
         return self.name_of_project
 
     def get_absolute_url(self):
-        return reverse("projects:detail", kwargs={"slug": self.slug})
+        return reverse("project_detail", kwargs={"slug": self.slug})
+
 
 
 def create_slug(instance, new_slug=None):
@@ -27,7 +28,7 @@ def create_slug(instance, new_slug=None):
 
 
 class Document(models.Model):
-    name_of_document = models.CharField(verbose_name='Name of Document', max_length=100, blank=False)
+    name_of_document = models.CharField(verbose_name='Name', max_length=100, blank=False, unique=True)
     file = models.FileField(upload_to='pdf')
     project = models.ManyToManyField(Project)
     created = models.DateTimeField('created', auto_now_add=True)

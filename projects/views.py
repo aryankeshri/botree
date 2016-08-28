@@ -38,7 +38,10 @@ def list_project(request):
 
 def list_document(request):
     documents = Document.objects.all()
-    return render(request, 'document_list.html', {'documents': documents})
+    context = {
+        'documents': documents
+    }
+    return render(request, 'document_list.html', context)
 
 def project_detail(request, slug=None):
     project = get_object_or_404(Project, slug=slug)

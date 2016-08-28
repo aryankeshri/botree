@@ -10,7 +10,7 @@ class AddProjectForm(forms.ModelForm):
 class AddDocumentForm(forms.ModelForm):
     class Meta:
         model = Document
-        fields = ['name_of_document', 'file',]
+        fields = ['file',]
 
     # def clean_file(self):
     #     file = self.cleaned_data.get('file')

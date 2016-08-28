@@ -1,55 +1,12 @@
-
-<!DOCTYPE html>
-
-<html lang="en-us" >
-<head>
-<title>Select project to change | Django site admin</title>
-<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css" />
-
-  
-  <link rel="stylesheet" type="text/css" href="/static/admin/css/changelists.css" />
-  
-  
-    <script type="text/javascript" src="/admin/jsi18n/"></script>
-  
-  
-  
-
-
-
-
-<script type="text/javascript" src="/static/admin/js/core.js"></script>
-<script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
-<script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
-<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
-<script type="text/javascript" src="/static/admin/js/actions.js"></script>
-<script type="text/javascript" src="/static/admin/js/urlify.js"></script>
-<script type="text/javascript" src="/static/admin/js/prepopulate.js"></script>
-<script type="text/javascript" src="/static/admin/js/vendor/xregexp/xregexp.min.js"></script>
-
-<script type="text/javascript">
-(function($) {
-    $(document).ready(function($) {
-        $("tr input.action-select").actions();
-    });
-})(django.jQuery);
-</script>
-
-
-<meta name="robots" content="NONE,NOARCHIVE" />
-</head>
-
-
-<body class=" app-projects model-project change-list"
-  data-admin-utc-offset="19800">
+{% extends "base.html" %}
+{% block content %}
 
 <!-- Container -->
 <div id="container">
 
 <div class="breadcrumbs">
-<a href="/admin/">Home</a>
-&rsaquo; <a href="/admin/projects/">Projects</a>
-&rsaquo; Projects
+<a href="/project/">Home</a> |
+<a href="/document/">Document</a>
 </div>
 
    <!-- Content -->
@@ -59,7 +16,7 @@
         
   <div id="content-main">
     
-      
+      <div>
         <ul class="object-tools">
           
             <li>
@@ -68,9 +25,16 @@
                 Add project
               </a>
             </li>
+             <li>
+
+              <a href="/add/document/" class="addlink">
+                Add document
+              </a>
+            </li>
           
         </ul>
-      
+      </div>
+
     
     
     <div class="module filtered" id="changelist">
@@ -88,47 +52,25 @@
 <script type="text/javascript">document.getElementById("searchbar").focus();</script>
 
 
-      
+<div id="changelist-filter">
+<h2>Filter</h2>
 
+    <h3> By Name </h3>
+    <ul>
 
-      
-        
-          <div id="changelist-filter">
-            <h2>Filter</h2>
-            
-<h3> By Name </h3>
-<ul>
+        <li class="selected">
+            {% for obj in projects %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.name_of_project }}</a></li>
+            {% endfor %}
+        </li>
+    </ul>
 
-    <li class="selected">
-        {% for obj in projects %}
-            <li><a href="{{ obj.get_absolute_url }}">{{ obj.name_of_project }}</a></li>
-    {% endfor %}
-</li>
-</ul>
-
-          </div>
-        
-      
-
-      <form id="changelist-form" method="post" novalidate><input type='hidden' name='csrfmiddlewaretoken' value='J03JlmyNO4dRI8vbjH6RFTSOYRqZALWT' />
-      
-
-      
-          
-<div class="actions">
-    <label>Action: <select name="action">
-<option value="" selected="selected">---------</option>
-<option value="delete_selected">Delete selected projects</option>
-</select></label><input class="select-across" name="select_across" type="hidden" value="0" />
-    <button type="submit" class="button" title="Run the selected action" name="index" value="0">Go</button>
-    
-        <script type="text/javascript">var _actions_icnt="4";</script>
-        <span class="action-counter">0 of 4 selected</span>
-        
-    
 </div>
 
-          
+
+<form id="changelist-form" method="post" novalidate>
+    <input type='hidden' name='csrfmiddlewaretoken' value='J03JlmyNO4dRI8vbjH6RFTSOYRqZALWT' />
+
 
 
 <div class="results">
@@ -167,35 +109,14 @@
         <td class="field-slug">{{ obj.slug }}</td>
     </tr>
 {% endfor %}
-
-<!--<tr class="row1"><td class="action-checkbox"><input class="action-select" name="_selected_action" type="checkbox" value="6" /></td><th class="field-name_of_project"><a href="/admin/projects/project/6/change/">xy-ab</a></th><td class="field-slug">xy-ab</td></tr>-->
-
-
-<!--<tr class="row2"><td class="action-checkbox"><input class="action-select" name="_selected_action" type="checkbox" value="5" /></td><th class="field-name_of_project"><a href="/admin/projects/project/5/change/">new project1</a></th><td class="field-slug">new-project1</td></tr>-->
-
-
-<!--<tr class="row1"><td class="action-checkbox"><input class="action-select" name="_selected_action" type="checkbox" value="2" /></td><th class="field-name_of_project"><a href="/admin/projects/project/2/change/">new project</a></th><td class="field-slug">new-project</td></tr>-->
-
-
-<!--<tr class="row2"><td class="action-checkbox"><input class="action-select" name="_selected_action" type="checkbox" value="1" /></td><th class="field-name_of_project"><a href="/admin/projects/project/1/change/">xyz</a></th><td class="field-slug">xyz</td></tr>-->
-
 </tbody>
 </table>
 </div>
 
-
-          
-      
-      
-
 <p class="paginator">
 
-4 projects
-
-
 </p>
-
-      </form>
+</form>
     </div>
   </div>
 
@@ -204,9 +125,9 @@
     </div>
     <!-- END Content -->
 
+
     <div id="footer"></div>
 </div>
 <!-- END Container -->
 
-</body>
-</html>
+{% endblock %}

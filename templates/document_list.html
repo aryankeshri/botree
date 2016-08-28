@@ -1,15 +1,121 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>articles</h1>
+{% extends "base.html" %}
+{% block content %}
+<!-- Container -->
+<div class="breadcrumbs">
+<a href="/project/">Home</a> |
+<a href="/document/">Document</a>
+</div>
+    <!-- Content -->
+    <div id="content" class="flex">
+
+        <h1>Select document to change</h1>
+
+  <div id="content-main">
+
+
+        <ul class="object-tools">
+
+            <li>
+
+              <a href="/add/document/" class="addlink">
+                Add document
+              </a>
+            </li>
+
+        </ul>
+
+
+
+    <div class="module" id="changelist">
+
+
+<div id="toolbar"><form id="changelist-search" method="get">
+<div><!-- DIV needed for valid HTML -->
+<label for="searchbar"><img src="/static/admin/img/search.svg" alt="Search" /></label>
+<input type="text" size="40" name="q" value="" id="searchbar" />
+<input type="submit" value="Search" />
+
+
+</div>
+</form></div>
+<script type="text/javascript">document.getElementById("searchbar").focus();</script>
+<div id="changelist-filter">
+    <h2>Filter</h2>
+
+    <h3> By Name </h3>
+    <ul>
+
+        <li class="selected">
+            {% for obj in documents %}
+                <li>{{ obj.file }}</li>
+            {% endfor %}
+        </li>
+    </ul>
+
+</div>
+
+<form id="changelist-form" method="post" novalidate>
+    <input type='hidden' name='csrfmiddlewaretoken' value='J03JlmyNO4dRI8vbjH6RFTSOYRqZALWT' />
+<div class="results">
+<table id="result_list">
+<thead>
+<tr>
+
+<th scope="col"  class="action-checkbox-column">
+
+   <div class="text"><span><input type="checkbox" id="action-toggle" /></span></div>
+   <div class="clear"></div>
+</th>
+<th scope="col"  class="sortable column-file">
+
+
+
+   <div class="text"><a href="?o=1">Name of Document</a></div>
+   <div class="clear"></div>
+</th>
+<th scope="col"  class="sortable column-created">
+
+
+
+   <div class="text"><a href="?o=2">Created</a></div>
+   <div class="clear"></div>
+</th>
+<th scope="col"  class="sortable column-modified">
+
+
+
+   <div class="text"><a href="?o=3">Modified</a></div>
+   <div class="clear"></div>
+</th>
+</tr>
+</thead>
+<tbody>
 {% for obj in documents %}
-    <h2>
-        {{ obj.document }}
-    </h2>
+    <tr class="row1">
+        <td class="action-checkbox">
+            <input class="action-select" name="_selected_action" type="checkbox" value="6" />
+        </td>
+        <th class="field-field"> {{ obj.file }}</th>
+        <td class="field-created nowrap">{{ obj.created }}</td>
+        <td class="field-modified nowrap">{{ obj.modified }}</td>
+    </tr>
 {% endfor %}
-</body>
-</html>
+
+</tbody>
+</table>
+</div>
+
+      </form>
+    </div>
+  </div>
+
+
+        <br class="clear" />
+    </div>
+    <!-- END Content -->
+
+    <div id="footer"></div>
+</div>
+<!-- END Container -->
+{% endblock %}
+

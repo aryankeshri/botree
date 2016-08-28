@@ -34,14 +34,14 @@ class Project(models.Model):
         return reverse("project_detail", kwargs={"slug": self.slug})
 
 class Document(models.Model):
-    name_of_document = models.CharField(verbose_name='Name', max_length=100, blank=False, unique=True)
-    file = models.FileField(upload_to='pdf', validators=[validation_file_extension])
+    file = models.FileField(upload_to='pdf', validators=[validation_file_extension], verbose_name='Name of Document')
     project = models.ManyToManyField(Project)
+
     created = models.DateTimeField('created', auto_now_add=True)
     modified = models.DateTimeField('modified', auto_now=True)
 
     def __str__(self):
-        return self.name_of_document
+        return '%s' % (self.file.name)
 
 
 

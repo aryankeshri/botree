@@ -2,13 +2,13 @@
 {% block content %}
 <!-- Container -->
 <div class="breadcrumbs">
-<a href="/project/">Home</a> |
+<a href="/">Home</a> |
 <a href="/document/">Document</a>
 </div>
     <!-- Content -->
     <div id="content" class="flex">
 
-        <h1>Select document to change</h1>
+        <h1><b>Documents</b></h1>
 
   <div id="content-main">
 
@@ -23,28 +23,13 @@
             </li>
 
         </ul>
-
-
-
-    <div class="module" id="changelist">
-
-
-<div id="toolbar"><form id="changelist-search" method="get">
-<div><!-- DIV needed for valid HTML -->
-<label for="searchbar"><img src="/static/admin/img/search.svg" alt="Search" /></label>
-<input type="text" size="40" name="q" value="" id="searchbar" />
-<input type="submit" value="Search" />
-
-
-</div>
-</form></div>
-<form id="changelist-form" method="post" novalidate>
-    <input type='hidden' name='csrfmiddlewaretoken' value='J03JlmyNO4dRI8vbjH6RFTSOYRqZALWT' />
+<div class="module" id="changelist">
+<form id="changelist-form" method="post" novalidate>{% csrf_token %}
 <div class="results">
 <table id="result_list">
 <thead>
 <tr>
-<th scope="col"  class="action-checkbox-column">
+<th scope="co0"  class="action-checkbox-column">
    <div class="text"><span><input type="checkbox" id="action-toggle" /></span></div>
    <div class="clear"></div>
 </th>
@@ -52,12 +37,16 @@
    <div class="text"><a href="?o=1">Name of Document</a></div>
    <div class="clear"></div>
 </th>
-<th scope="col"  class="sortable column-created">
+<th scope="co2"  class="sortable column-created">
    <div class="text"><a href="?o=2">Created</a></div>
    <div class="clear"></div>
 </th>
-<th scope="col"  class="sortable column-addlink">
-    <div class="text"><a href="?o=2">Add</a></div>
+<th scope="co3"  class="sortable column-project">
+   <div class="text"><a href="?o=3">Project</a></div>
+   <div class="clear"></div>
+</th>
+<th scope="co4"  class="sortable column-addlink">
+    <div class="text"><a href="?o=4">Add</a></div>
     <div class="clear"></div>
 </th>
 </tr>
@@ -66,10 +55,11 @@
 {% for obj in documents %}
     <tr class="row1">
         <td class="action-checkbox">
-            <input class="action-select" name="_selected_action" type="checkbox" value="" />
+            <input class="action-select" name="_selected_action" type="checkbox" value="{{ obj.id }}" />
         </td>
-        <th class="field-field"> {{ obj.file }}</th>
+        <th class="field-field"><a href="/media/{{ obj.file }}"> {{ obj.file }}</a></th>
         <td class="field-created nowrap">{{ obj.created }}</td>
+        <td class="field-created nowrap">{{ obj.project_id }}</td>
         <td class="field-addlink"><a href="/add/document/"><img src="/static/admin/img/icon-addlink.svg" alt="Add" /></a></td>
     </tr>
 {% endfor %}

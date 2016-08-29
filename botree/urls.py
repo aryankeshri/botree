@@ -22,8 +22,8 @@ from projects.views import list_project, list_document, add_project, add_documen
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', home, name='home'),
-    url(r'^project/$', list_project, name='list_project'),
+    # url(r'^$', home, name='home'),
+    url(r'^$', list_project, name='list_project'),
     url(r'^document/$', list_document, name='list_document'),
     url(r'^add/project/$', add_project, name='add_project'),
     url(r'^add/document/$', add_document, name='add_document'),

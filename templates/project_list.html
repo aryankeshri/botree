@@ -5,14 +5,14 @@
 <div id="container">
 
 <div class="breadcrumbs">
-<a href="/project/">Home</a> |
+<a href="/">Home</a> |
 <a href="/document/">Document</a>
 </div>
 
    <!-- Content -->
     <div id="content" class="flex">
         
-        <h1>Select project to change</h1>
+        <h1><b>Projects</b></h1>
         
   <div id="content-main">
     
@@ -36,17 +36,7 @@
       </div>
 
     <div class="module filtered" id="changelist">
-
-<div id="toolbar"><form id="changelist-search" method="get">
-<div><!-- DIV needed for valid HTML -->
-<label for="searchbar"><img src="/static/admin/img/search.svg" alt="Search" /></label>
-<input type="text" size="40" name="q" value="" id="searchbar" />
-<input type="submit" value="Search" />
-
-
-</div>
-</form></div>
-<script type="text/javascript">document.getElementById("searchbar").focus();</script>
+<!--<script type="text/javascript">document.getElementById("searchbar").focus();</script>-->
 
 
 <div id="changelist-filter">
@@ -69,16 +59,12 @@
 <thead>
 <tr>
 
-<th scope="col"  class="action-checkbox-column">
-   <div class="text"><span><input type="checkbox" id="action-toggle" /></span></div>
-   <div class="clear"></div>
-</th>
 <th scope="col"  class="sortable column-name_of_project">
    <div class="text"><a href="?o=1">Name</a></div>
    <div class="clear"></div>
 </th>
 <th scope="col"  class="sortable column-created">
-   <div class="text"><a href="?o=2">Project</a></div>
+   <div class="text"><a href="?o=2">Documents</a></div>
    <div class="clear"></div>
 </th>
 </tr>
@@ -86,11 +72,8 @@
 <tbody>
 {% for obj in projects %}
     <tr class="row1">
-        <td class="action-checkbox">
-            <input class="action-select" name="_selected_action" type="checkbox" value="6" />
-        </td>
         <th class="field-name_of_project"><a href="{{ obj.get_absolute_url }}">{{ obj.name_of_project }}</a></th>
-        <td >{{ no_document }}</td>
+        <td class="field-created nowrap">{{ obj.id }}</td>
     </tr>
 {% endfor %}
 </tbody>

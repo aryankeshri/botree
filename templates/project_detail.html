@@ -5,10 +5,10 @@
 <div id="container">
 
 <div class="breadcrumbs">
-<a href="/project/">Home</a> |
+<a href="/">Home</a> |
 <a href="/document/">Document</a>
 </div>
-<h1>Documents ({{ no_document }})</h1>
+<h1>Documents({{ no_document }})</h1>
 <div class="results">
 <table id="result_list">
 <thead>
@@ -28,18 +28,33 @@
 </th>
 </tr>
 </thead>
+
 <tbody>
 {% for obj in documents %}
     <tr class="row1">
         <td class="action-checkbox">
-            <input class="action-select" name="_selected_action" type="checkbox" value="6" />
+            <input class="action-select" name="_selected_action" type="checkbox" value="{{ obj.id }" />
         </td>
-        <th class="field-name_of_document">{{ obj }}</th>
+        <th class="field-name_of_document"><a href="/media/{{ obj }}">{{ obj }}</a></th>
         <th class="field-name_of_document">{{ obj.created }}</th>
     </tr>
 {% endfor %}
 </tbody>
+
 </table>
+
+    <hr/>
+
+<div class='col-sm-6 col-sm-offset-3'>
+     <form method="POST" action=".">{% csrf_token %}
+        <input type='submit' value='Delete' class='btn btn-warning'>
+        <a href='/' class='btn btn-default'><input type='button' value='Cancel' class='btn btn-warning'></a>
+     </form>
+</div>
+    <hr/>
+</div>
+
+
 </div>
 
 </div>

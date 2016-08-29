@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -9,10 +10,10 @@ from .models import Project, Document
 def home(request):
     return render(request, 'base.html')
 
-def list_project(request):
-    projects = Project.objects.all()
-    pid = projects.filter(name_of_project__icontains='test1')
+def list_project(request, id=None):
+    pid = Project.objects.all().filter(pk=id)
     no_document = len(Document.objects.filter(project__id = pid))
+    projects = Project.objects.all()
     query = request.GET.get("q")
     if query:
         projects = projects.filter(
@@ -69,7 +70,8 @@ def add_project(request):
         if form.is_valid():
             instance = form.save(commit=False)
             instance.save()
-            return HttpResponse('<h1>Add new project</h1>')
+            messages.success(request, "Successfully Created")
+            return HttpResponseRedirect(instance.get_absolute_url())
     else:
         form = AddProjectForm()
     return render(request, 'add_project.html', {'form':form})

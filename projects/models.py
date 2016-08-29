@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 # Create your models here.
 
 def create_slug(instance, new_slug=None):
-    slug = slugify(instance.title)
+    slug = slugify(instance.name_of_project)
     if new_slug is not None:
         slug = new_slug
     qs = Project.objects.filter(slug=slug).order_by("-id")
@@ -24,8 +24,8 @@ def validation_file_extension(value):
         raise ValidationError(u'Unsupported file extension.')
 
 class Project(models.Model):
-    name_of_project = models.CharField(verbose_name="Name of Project", max_length=50, blank=False, unique=True)
-    slug = models.SlugField(unique=True, max_length=50)
+    name_of_project = models.CharField(verbose_name="Name", max_length=50, blank=False, unique=True)
+    slug = models.SlugField(verbose_name="Slug", unique=True, max_length=50)
 
     def __str__(self):
         return self.name_of_project
@@ -35,7 +35,7 @@ class Project(models.Model):
 
 class Document(models.Model):
     file = models.FileField(upload_to='pdf', validators=[validation_file_extension], verbose_name='Name of Document')
-    project = models.ForeignKey(Project, blank=False, default=False)
+    project = models.ForeignKey(Project, blank=False, default=False, verbose_name='Name of Project ')
     created = models.DateTimeField('created', auto_now_add=True)
 
     def __str__(self):

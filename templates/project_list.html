@@ -63,9 +63,7 @@
     </ul>
 
 </div>
-<form id="changelist-form" method="post" novalidate>
-    <input type='hidden' name='csrfmiddlewaretoken' value='J03JlmyNO4dRI8vbjH6RFTSOYRqZALWT' />
-
+<form id="changelist-form" method="post" novalidate>{% csrf_token %}
 <div class="results">
 <table id="result_list">
 <thead>

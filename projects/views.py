@@ -48,7 +48,20 @@ def list_document(request):
 
 def project_detail(request, slug=None):
     project = get_object_or_404(Project, slug=slug)
-    return render(request, "project_detail.html", {"project": project})
+    # print(project)
+    pid = Project.objects.all().filter(name_of_project__icontains=project)
+    documents = Document.objects.filter(project__id=pid)
+    # print(documents)
+    # for x in documents:
+    #     print(x.created)
+    no_document = len(documents)
+    # print(no_document)
+    context = {
+        "project": project,
+        "documents": documents,
+        "no_document": no_document
+    }
+    return render(request, "project_detail.html", context)
 
 def add_project(request):
     if request.method == 'POST':

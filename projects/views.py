@@ -71,6 +71,7 @@ def add_document(request):
             return HttpResponse('<h1>Add new Document</h1>')
     else:
         form = AddDocumentForm()
+
     context = {
         'form': form
     }

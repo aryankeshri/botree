@@ -27,7 +27,6 @@ class Project(models.Model):
     name_of_project = models.CharField(verbose_name="Name of Project", max_length=50, blank=False, unique=True)
     slug = models.SlugField(unique=True, max_length=50)
 
-    @property
     def __str__(self):
         return self.name_of_project
 
@@ -36,7 +35,7 @@ class Project(models.Model):
 
 class Document(models.Model):
     file = models.FileField(upload_to='pdf', validators=[validation_file_extension], verbose_name='Name of Document')
-    project = models.ForeignKey(Project, related_name='Project', blank=False, default=False)
+    project = models.ForeignKey(Project, blank=False, default=False)
     created = models.DateTimeField('created', auto_now_add=True)
 
     def __str__(self):

@@ -11,12 +11,14 @@ def home(request):
 
 def list_project(request):
     projects = Project.objects.all()
+    pid = projects.filter(name_of_project__icontains='test1')
+    no_document = len(Document.objects.filter(project__id = pid))
     query = request.GET.get("q")
     if query:
         projects = projects.filter(
             Q(name_of_project__icontains=query)
         ).distinct()
-    paginator = Paginator(projects, 2)
+    paginator = Paginator(projects, 10)
     page_request_var = "page"
     page = request.GET.get(page_request_var)
     try:
@@ -32,7 +34,8 @@ def list_project(request):
         "object_list": queryset,
         "title": "List",
         "page_request_var": page_request_var,
-        'projects': projects
+        'projects': projects,
+        'no_document': no_document
     }
     return render(request, 'project_list.html', context)
 
@@ -58,6 +61,7 @@ def add_project(request):
         form = AddProjectForm()
     return render(request, 'add_project.html', {'form':form})
 
+
 def add_document(request):
     if request.method == 'POST':
         form = AddDocumentForm(request.POST, request.FILES)
@@ -71,5 +75,3 @@ def add_document(request):
         'form': form
     }
     return render(request, 'add_document.html', context)
-
-

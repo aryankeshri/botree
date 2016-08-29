@@ -14,7 +14,7 @@ class ProjectAdmin(admin.ModelAdmin):
 
 
 class DocumentAdmin(admin.ModelAdmin):
-    list_display = ['file', 'created', 'modified']
+    list_display = ['file', 'created']
     search_fields = ['file',]
 
     class Meta:

@@ -38,54 +38,27 @@
 
 </div>
 </form></div>
-<script type="text/javascript">document.getElementById("searchbar").focus();</script>
-<div id="changelist-filter">
-    <h2>Filter</h2>
-
-    <h3> By Name </h3>
-    <ul>
-
-        <li class="selected">
-            {% for obj in documents %}
-                <li>{{ obj.file }}</li>
-            {% endfor %}
-        </li>
-    </ul>
-
-</div>
-
 <form id="changelist-form" method="post" novalidate>
     <input type='hidden' name='csrfmiddlewaretoken' value='J03JlmyNO4dRI8vbjH6RFTSOYRqZALWT' />
 <div class="results">
 <table id="result_list">
 <thead>
 <tr>
-
 <th scope="col"  class="action-checkbox-column">
-
    <div class="text"><span><input type="checkbox" id="action-toggle" /></span></div>
    <div class="clear"></div>
 </th>
 <th scope="col"  class="sortable column-file">
-
-
-
    <div class="text"><a href="?o=1">Name of Document</a></div>
    <div class="clear"></div>
 </th>
 <th scope="col"  class="sortable column-created">
-
-
-
    <div class="text"><a href="?o=2">Created</a></div>
    <div class="clear"></div>
 </th>
-<th scope="col"  class="sortable column-modified">
-
-
-
-   <div class="text"><a href="?o=3">Modified</a></div>
-   <div class="clear"></div>
+<th scope="col"  class="sortable column-addlink">
+    <div class="text"><a href="?o=2">Add</a></div>
+    <div class="clear"></div>
 </th>
 </tr>
 </thead>
@@ -93,11 +66,11 @@
 {% for obj in documents %}
     <tr class="row1">
         <td class="action-checkbox">
-            <input class="action-select" name="_selected_action" type="checkbox" value="6" />
+            <input class="action-select" name="_selected_action" type="checkbox" value="" />
         </td>
         <th class="field-field"> {{ obj.file }}</th>
         <td class="field-created nowrap">{{ obj.created }}</td>
-        <td class="field-modified nowrap">{{ obj.modified }}</td>
+        <td class="field-addlink"><a href="/add/document/"><img src="/static/admin/img/icon-addlink.svg" alt="Add" /></a></td>
     </tr>
 {% endfor %}
 
@@ -108,10 +81,9 @@
       </form>
     </div>
   </div>
-
-
         <br class="clear" />
     </div>
+
     <!-- END Content -->
 
     <div id="footer"></div>

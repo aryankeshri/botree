@@ -10,11 +10,4 @@ class AddProjectForm(forms.ModelForm):
 class AddDocumentForm(forms.ModelForm):
     class Meta:
         model = Document
-        fields = ['file',]
-
-    # def clean_file(self):
-    #     file = self.cleaned_data.get('file')
-    #     type = file.endswith('pdf')
-    #     if not type == 'pdf':
-    #         raise forms.ValidationError('Please use .pdf files only!')
-    #     return file
+        fields = ['file', 'project']

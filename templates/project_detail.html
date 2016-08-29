@@ -1,19 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document List</title>
-</head>
-<body>
- <h1>Documents</h1>
-    <ul>
+{% extends "base.html" %}
+{% block content %}
 
-    {% for obj in document %}
-        <li><h2>
-            {{ obj.name_of_document }}
-        </h2></li>
-    {% endfor %}
-    </ul>
+<!-- Container -->
+<div id="container">
 
-</body>
-</html>
+<div class="breadcrumbs">
+<a href="/project/">Home</a> |
+<a href="/document/">Document</a>
+</div>
+
+
+</div>
+{% endblock %}

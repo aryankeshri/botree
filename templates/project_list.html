@@ -79,22 +79,15 @@
 <tr>
 
 <th scope="col"  class="action-checkbox-column">
-   
    <div class="text"><span><input type="checkbox" id="action-toggle" /></span></div>
    <div class="clear"></div>
 </th>
 <th scope="col"  class="sortable column-name_of_project">
-   
-     
-   
    <div class="text"><a href="?o=1">Name</a></div>
    <div class="clear"></div>
 </th>
-<th scope="col"  class="sortable column-slug">
-   
-     
-   
-   <div class="text"><a href="?o=2">Slug</a></div>
+<th scope="col"  class="sortable column-created">
+   <div class="text"><a href="?o=2">Project</a></div>
    <div class="clear"></div>
 </th>
 </tr>
@@ -106,7 +99,7 @@
             <input class="action-select" name="_selected_action" type="checkbox" value="6" />
         </td>
         <th class="field-name_of_project"><a href="{{ obj.get_absolute_url }}">{{ obj.name_of_project }}</a></th>
-        <td class="field-slug">{{ obj.slug }}</td>
+        <td >{{ no_document }}</td>
     </tr>
 {% endfor %}
 </tbody>
@@ -114,13 +107,24 @@
 </div>
 
 <p class="paginator">
+        <span class="step-links">
+        {% if object_list.has_previous %}
+            <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+        </span>
+
+        {% if object_list.has_next %}
+            <a href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+        {% endif %}
+    </span>
 
 </p>
 </form>
     </div>
   </div>
-
-        
         <br class="clear" />
     </div>
     <!-- END Content -->

@@ -18,7 +18,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from projects.views import list_project, list_document, add_project, add_document, home, project_detail, delete_document
+from projects.views import list_project, list_document, add_project, add_document, project_detail, delete_document
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

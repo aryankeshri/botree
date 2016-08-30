@@ -80,11 +80,11 @@ WSGI_APPLICATION = 'botree.wsgi.application'
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'botree',
-            'USER': 'postgres',
-            'PASSWORD': 'password',
-            'HOST': 'localhost',
-            'PORT': '',
+            'NAME': 'dathiatent0t99',
+            'USER': 'viepmnhcnaukhv',
+            'PASSWORD': 'edycOX1_Egv4PdkoA0_tUNzvo3',
+            'HOST': 'ec2-54-221-253-87.compute-1.amazonaws.com',
+            'PORT': '5432',
         }
 }
 

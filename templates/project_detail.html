@@ -19,11 +19,15 @@
    <div class="clear"></div>
 </th>
 <th scope="col"  class="sortable column-name_of_project">
-   <div class="text"><a href="?o=1">Name of Document</a></div>
+   <div class="text"><a href="?o=1"><b>Name of Document</b></a></div>
    <div class="clear"></div>
 </th>
 <th scope="col"  class="sortable column-created">
-   <div class="text"><a href="?o=2">Upload on</a></div>
+   <div class="text"><a href="?o=2"><b>Upload on</b></a></div>
+   <div class="clear"></div>
+</th>
+<th scope="col"  class="sortable column-created">
+   <div class="text"><a href="?o=2"><b>Delete</b></a></div>
    <div class="clear"></div>
 </th>
 </tr>
@@ -33,29 +37,20 @@
 {% for obj in documents %}
     <tr class="row1">
         <td class="action-checkbox">
-            <input class="action-select" name="_selected_action" type="checkbox" value="{{ obj.id }" />
+            <input class="action-select" name="_selected_action" type="checkbox" value="{{ obj.id }}" />
         </td>
         <th class="field-name_of_document"><a href="/media/{{ obj }}">{{ obj }}</a></th>
         <th class="field-name_of_document">{{ obj.created }}</th>
+        <td class="field-deletelink"><a href="{% url 'delete_document' id=obj.id %}"><img src="/static/admin/img/icon-deletelink.svg" alt="Delete" /></a></td>
     </tr>
 {% endfor %}
 </tbody>
 
 </table>
-
-    <hr/>
-
-<div class='col-sm-6 col-sm-offset-3'>
-     <form method="POST" action=".">{% csrf_token %}
-        <input type='submit' value='Delete' class='btn btn-warning'>
-        <a href='/' class='btn btn-default'><input type='button' value='Cancel' class='btn btn-warning'></a>
-     </form>
-</div>
     <hr/>
 </div>
 
 
 </div>
 
-</div>
 {% endblock %}

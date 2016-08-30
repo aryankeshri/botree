@@ -18,16 +18,16 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from projects.views import list_project, list_document, add_project, add_document, home, project_detail
+from projects.views import list_project, list_document, add_project, add_document, home, project_detail, delete_document
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    # url(r'^$', home, name='home'),
     url(r'^$', list_project, name='list_project'),
     url(r'^document/$', list_document, name='list_document'),
     url(r'^add/project/$', add_project, name='add_project'),
     url(r'^add/document/$', add_document, name='add_document'),
     url(r'^project/(?P<slug>[\w-]+)/$', project_detail, name='project_detail'),
+    url(r'^document/delete/(?P<id>\d+)/$', delete_document, name='delete_document'),
 ]
 
 

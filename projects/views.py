@@ -1,18 +1,20 @@
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+from django.core.urlresolvers import reverse
+
 from .forms import AddProjectForm, AddDocumentForm
 from .models import Project, Document
 
 # Create your views here.
-def home(request):
-    return render(request, 'base.html')
-
+# listing of projects
 def list_project(request, id=None):
     pid = Project.objects.all().filter(pk=id)
+    print(pid)
     no_document = len(Document.objects.filter(project__id = pid))
+    print(no_document)
     projects = Project.objects.all()
     query = request.GET.get("q")
     if query:
@@ -40,6 +42,8 @@ def list_project(request, id=None):
     }
     return render(request, 'project_list.html', context)
 
+
+# listing of documents
 def list_document(request):
     documents = Document.objects.all()
     context = {
@@ -47,16 +51,14 @@ def list_document(request):
     }
     return render(request, 'document_list.html', context)
 
+
+# detail of related project
 def project_detail(request, slug=None):
     project = get_object_or_404(Project, slug=slug)
-    # print(project)
     pid = Project.objects.all().filter(name_of_project__icontains=project)
     documents = Document.objects.filter(project__id=pid)
-    # print(documents)
-    # for x in documents:
-    #     print(x.created)
     no_document = len(documents)
-    # print(no_document)
+
     context = {
         "project": project,
         "documents": documents,
@@ -64,6 +66,8 @@ def project_detail(request, slug=None):
     }
     return render(request, "project_detail.html", context)
 
+
+# add project
 def add_project(request):
     if request.method == 'POST':
         form = AddProjectForm(request.POST)
@@ -77,13 +81,14 @@ def add_project(request):
     return render(request, 'add_project.html', {'form':form})
 
 
+# add document
 def add_document(request):
     if request.method == 'POST':
         form = AddDocumentForm(request.POST, request.FILES)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.save()
-            return HttpResponse('<h1>Add new Document</h1>')
+            return redirect('add_document')
     else:
         form = AddDocumentForm()
 
@@ -91,3 +96,10 @@ def add_document(request):
         'form': form
     }
     return render(request, 'add_document.html', context)
+
+
+# delete document from the project
+def delete_document(request, id):
+    u = get_object_or_404(Document, pk=id).delete()
+    print(u)
+    return HttpResponseRedirect('/')

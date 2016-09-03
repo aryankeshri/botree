@@ -45,7 +45,8 @@ def list_project(request, id=None):
 
 # listing of documents
 def list_document(request):
-    documents = Document.objects.all()
+    documents = Document.objects.all().select_related('project')
+    print(documents)
     context = {
         'documents': documents
     }
@@ -75,7 +76,7 @@ def add_project(request):
             instance = form.save(commit=False)
             instance.save()
             messages.success(request, "Successfully Created")
-            return HttpResponseRedirect(instance.get_absolute_url())
+            return redirect('list_project')
     else:
         form = AddProjectForm()
     return render(request, 'add_project.html', {'form':form})
@@ -88,7 +89,7 @@ def add_document(request):
         if form.is_valid():
             instance = form.save(commit=False)
             instance.save()
-            return redirect('add_document')
+            return redirect('list_document')
     else:
         form = AddDocumentForm()
 

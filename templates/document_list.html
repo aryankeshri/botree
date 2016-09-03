@@ -1,10 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <!-- Container -->
-<div class="breadcrumbs">
-<a href="/">Home</a> |
-<a href="/document/">Document</a>
-</div>
+
     <!-- Content -->
     <div id="content" class="flex">
 
@@ -59,7 +56,7 @@
         </td>
         <th class="field-field"><a href="/media/{{ obj.file }}"> {{ obj.file }}</a></th>
         <td class="field-created nowrap">{{ obj.created }}</td>
-        <td class="field-created nowrap">{{ obj.project_id }}</td>
+        <td class="field-created nowrap">{{ obj.project.slug }}</td>
         <td class="field-addlink"><a href="/add/document/"><img src="/static/admin/img/icon-addlink.svg" alt="Add" /></a></td>
     </tr>
 {% endfor %}

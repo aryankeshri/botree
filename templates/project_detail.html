@@ -35,7 +35,7 @@
         <td class="action-checkbox">
             <input class="action-select" name="_selected_action" type="checkbox" value="{{ obj.id }}" />
         </td>
-        <th class="field-name_of_document"><a href="/media/{{ obj }}">{{ obj }}</a></th>
+        <th class="field-name_of_document"><a href="/media/{{ obj }}">{{ obj.doc_name }}</a></th>
         <th class="field-name_of_document">{{ obj.created }}</th>
         <td class="field-deletelink"><a href="{% url 'delete_document' id=obj.id %}"><img src="/static/admin/img/icon-deletelink.svg" alt="Delete" /></a></td>
     </tr>

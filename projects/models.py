@@ -45,6 +45,9 @@ class Document(models.Model):
     def __str__(self):
         return '{0}' .format(self.file.name)
 
+    def doc_name(self):
+        return self.file.name.split('/')[-1]  # only the name, not full path
+
 
 
 

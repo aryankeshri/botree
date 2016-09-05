@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from projects.views import list_project, list_document, add_project, add_document, project_detail, delete_document
+from career.views import add_profile
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -28,6 +29,7 @@ urlpatterns = [
     url(r'^add/document/$', add_document, name='add_document'),
     url(r'^project/(?P<slug>[\w-]+)/$', project_detail, name='project_detail'),
     url(r'^document/delete/(?P<id>\d+)/$', delete_document, name='delete_document'),
+    url(r'^career/add/$', add_profile, name='add_profile'),
 ]
 
 

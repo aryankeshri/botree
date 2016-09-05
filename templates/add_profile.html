@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div style="margin:0 40%;">
+<form method='POST' action='' enctype="multipart/form-data" style="padding: 10px; width: 390px;">{% csrf_token %}
+{{ form.as_p }}
+<input type='submit' class='btn btn-default' value='Add Profile' style="margin: 0 28%;" />
+</form>
+</div>
+{% endblock %}

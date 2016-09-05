@@ -11,10 +11,9 @@ from .models import Project, Document
 # Create your views here.
 # listing of projects
 def list_project(request, id=None):
+    id = request.POST.get('id')
     pid = Project.objects.all().filter(pk=id)
-    print(pid)
     no_document = len(Document.objects.filter(project__id = pid))
-    print(no_document)
     projects = Project.objects.all()
     query = request.GET.get("q")
     if query:
@@ -46,7 +45,7 @@ def list_project(request, id=None):
 # listing of documents
 def list_document(request):
     documents = Document.objects.all().select_related('project')
-    print(documents)
+
     context = {
         'documents': documents
     }
@@ -102,5 +101,4 @@ def add_document(request):
 # delete document from the project
 def delete_document(request, id):
     u = get_object_or_404(Document, pk=id).delete()
-    print(u)
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/document/')

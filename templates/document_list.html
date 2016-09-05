@@ -54,9 +54,9 @@
         <td class="action-checkbox">
             <input class="action-select" name="_selected_action" type="checkbox" value="{{ obj.id }}" />
         </td>
-        <th class="field-field"><a href="/media/{{ obj.file }}"> {{ obj.file }}</a></th>
+        <th class="field-field"><a href="/media/{{ obj.file }}"> {{ obj.doc_name }}</a></th>
         <td class="field-created nowrap">{{ obj.created }}</td>
-        <td class="field-created nowrap">{{ obj.project.slug }}</td>
+        <td class="field-created nowrap">{{ obj.project.name_of_project }}</td>
         <td class="field-addlink"><a href="/add/document/"><img src="/static/admin/img/icon-addlink.svg" alt="Add" /></a></td>
     </tr>
 {% endfor %}

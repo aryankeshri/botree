@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # my apps
     'projects',
+    'career',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -78,14 +79,22 @@ WSGI_APPLICATION = 'botree.wsgi.application'
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'dathiatent0t99',
-            'USER': 'viepmnhcnaukhv',
-            'PASSWORD': 'edycOX1_Egv4PdkoA0_tUNzvo3',
-            'HOST': 'ec2-54-221-253-87.compute-1.amazonaws.com',
-            'PORT': '5432',
-        }
+        # 'default': {
+        #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #     'NAME': 'dathiatent0t99',
+        #     'USER': 'viepmnhcnaukhv',
+        #     'PASSWORD': 'edycOX1_Egv4PdkoA0_tUNzvo3',
+        #     'HOST': 'ec2-54-221-253-87.compute-1.amazonaws.com',
+        #     'PORT': '5432',
+        # }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'botree',
+        'USER': 'postgres',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
 }
 
 
